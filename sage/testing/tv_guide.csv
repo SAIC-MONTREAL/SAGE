@@ -1,0 +1,11 @@
+channel_number,channel_name,program_name,start_ts,end_ts,program_desc
+1,CBC,CBC News,00:19:00,00:20:00,"Stay informed with the latest breaking news, in-depth analysis, and investigative reports from around the world on CBC News."
+2,CTV,Big Bang Theory,00:19:00,00:20:00,"Join a group of quirky scientists and their humorous adventures as they navigate life, love, and the complexities of the universe in this popular sitcom."
+3,PBS Kids,Sesame Street,00:19:00,00:20:00,"Delight in educational and entertaining stories featuring beloved characters as they teach valuable lessons through songs, puppetry, and animation."
+4,BBC,BBC News,00:19:00,00:20:00,"Get a global perspective on current events, politics, and culture through comprehensive reporting, interviews, and analysis on BBC News."
+5,Food Network,Jamie Oliver,00:19:00,00:20:00,"Embark on a culinary journey with renowned chef Jamie Oliver as he shares delicious recipes, cooking tips, and food inspiration."
+6,TSN 1,NHL: MTL vs PHI,00:19:00,00:20:00,Witness intense ice hockey action as the Montreal Canadiens face off against the Philadelphia Flyers in a thrilling NHL matchup.
+7,TSN 2,NBA: TOR vs ATL,00:19:00,00:20:00,Experience the excitement of basketball as the Toronto Raptors take on the Atlanta Hawks in an electrifying NBA game.
+8,Sportsnet,NHL: DET vs COL,00:19:00,00:20:00,Tune in to catch the Detroit Red Wings battling the Colorado Avalanche in a high-stakes NHL ice hockey showdown.
+9,National Geographic,Wildlife: Resurrection Island,00:19:00,00:20:00,"Explore the mesmerizing ecosystem of Resurrection Island, where wildlife thrives and unfolds its captivating stories in the heart of nature."
+10,Yes TV,Jeopardy!,00:19:00,00:20:00,"Test your knowledge and quick thinking with the legendary quiz show Jeopardy! as contestants engage in intellectual challenges to win prizes and acclaim."

@@ -1,0 +1,95 @@
+{
+    "dmitriy": {
+        "history": {
+            "2023-08-07": [
+                "The Twilight Zone is my all-time favorite show. Do you have any similar recommendations?",
+                "Avoid recommending any horror movies, please. They're not really my thing."
+            ],
+            "2023-08-09": [
+                "Can you suggest both movies and shows that I might enjoy?",
+                "I am enjoying living in Montreal",
+                "Yay! Its sunny outside. Turn the bedroom lights to yellow. I want my room to match the outside."
+            ],
+            "2023-08-05": [
+                "Which basketball team do you think will win the championship this year?",
+                "Hey, can you recommend any sci-fi movies for me to watch tonight?",
+                "Hey, its cloudy outside, can you change the lights to blue? Makes me feel better."
+            ],
+            "2023-08-06": [
+                "What are some good comedy shows that I can binge-watch this weekend?",
+                "I love swimming! Any tips on improving my technique or any upcoming swimming events I should know about?",
+                "My favorite movies are Unforgiven, Pulp Fiction, Barry Lyndon, and How to Steal a Million. Have you seen any of them?"
+            ],
+            "2023-08-010": [
+                "Hockey is no fun to watch at all."
+            ]
+        },
+        "profile": "{\n  \"sports\": [\"swimming\"],\n  \"favorite_teams\": [],\n  \"shows_genre\": [\"comedy\"],\n  \"movie_genre\": [],\n  \"favorite_shows\": [],\n  \"favorite_movies\": [\"Unforgiven\", \"Pulp Fiction\", \"Barry Lyndon\", \"How to Steal a Million\"],\n  \"genre_to_avoid\": [\"horror\"]\n}"
+    },
+    "amal": {
+        "history": {
+            "2023-08-09": [
+                "Please avoid suggesting any horror or violent movies.",
+                "What are some good documentary, drama, comedy, and fantasy shows that I can binge-watch?"
+            ],
+            "2023-08-05": [
+                "Hey, can you recommend any thriller or sci-fi movies for me to watch tonight?",
+                "Can you show me TV shows instead of movies?"
+            ],
+            "2023-08-08": [
+                "Can you find any recent boxing matches for me to watch?",
+                "I have a hard time sleeping in the dark.",
+                "Usually red light gives me a better sleep quality."
+            ],
+            "2023-08-02": [
+                "Who won the basketball game last night?"
+            ],
+            "2023-08-04": [
+                "Remind me to watch Jumanji, Lord of the Rings, and One Day sometime this week."
+            ],
+            "2023-08-07": [
+                "Is there a new episode of Modern Family available?"
+            ],
+            "2023-08-01": [
+                "Tell me the latest news about Lionel Messi and Rotang.",
+                "Any updates on the soccer match between Barcelona and their rival team?"
+            ]
+        },
+        "profile": "{\n  \"sports\": [\"basketball\", \"soccer\"],\n  \"favorite_teams\": [\"Barcelona\"],\n  \"shows_genre\": [\"documentary\", \"drama\", \"comedy\", \"fantasy\"],\n  \"movie_genre\": [\"fantasy\"],\n  \"favorite_shows\": [\"Modern Family\"],\n  \"favorite_movies\": [\"Jumanji\", \"Lord of the Rings\", \"One Day\"],\n  \"genre_to_avoid\": [\"horror\", \"violent\"]\n}"
+    },
+    "abhisek": {
+        "history": {
+            "2023-08-09": [
+                "Please avoid suggesting any horror or violent movies.",
+                "My mom lives in Quebec City."
+            ],
+            "2023-08-08": [
+                "Can you check when the next game for the Montreal Canadians and Toronto Raptors is scheduled?",
+                "Which basketball and hockey teams do you think are worth following?",
+                "What are some comedy shows that I might enjoy?"
+            ],
+            "2023-08-04": [
+                "Should I watch movies or shows tonight?"
+            ],
+            "2023-08-01": [
+                "Can you find out if Seinfeld is available to stream anywhere?",
+                "Do you know any tennis or cycling events happening soon?",
+                "Just for reference, I really like dim, warm temperature light. Makes me feel snug."
+            ],
+            "2023-08-02": [
+                "Who are some notable players in basketball and cycling? I'm a fan of Lebron James and Tadej Poga\u010dar."
+            ],
+            "2023-08-07": [
+                "Have you heard of the movie How to Kill a Mockingbird? It's one of my favorites.",
+                "Hey, can you recommend a good thriller movie for me to watch tonight?"
+            ],
+            "2023-10-16": [
+                "When I ask what I missed, summarize my 2 most recent emails."
+            ],
+            "2023-10-17": [
+                "If I ask to turn the light on while the TV is on, turn on the light in the same room"
+            ]
+        },
+        "profile": "{\n  \"sports\": [\"basketball\", \"hockey\", \"tennis\", \"cycling\"],\n  \"favorite_teams\": [\"Montreal Canadians\", \"Toronto Raptors\"],\n  \"shows_genre\": [\"comedy\"],\n  \"movie_genre\": [\"drama\", \"suspense\"],\n  \"favorite_shows\": [],\n  \"favorite_movies\": [\"How to Kill a Mockingbird\"],\n  \"genre_to_avoid\": [\"horror\", \"violent\"]\n}"
+    }
+}

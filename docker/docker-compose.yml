@@ -1,0 +1,15 @@
+# Use root/example as user/password credentials
+# version: 'jammy'
+
+services:
+
+  mongo:
+    image: mongo:jammy
+    restart: always
+    ports:
+      - 0.0.0.0:27017:27017
+    volumes:
+      - /data/smarthome_mongo_db:/data/db
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
