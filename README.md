@@ -53,9 +53,9 @@ docker compose up
 python $SMARTHOME_ROOT/bin/demo.py
 ```
 
-## Using our smart home perfomance test benchmark
+## Using our smart home performance test benchmark
 
-We carefully designed and implemeneted an LLM evaluation benchmark for smarthomes.
+We carefully designed and implemented an LLM evaluation benchmark for smarthomes.
 The benchmark consists of 50 testcases belonging to different tasks within a smarthome.
 
 You can look at the testcases in `$SMARTHOME_ROOT/sage/testing/testcases.py`
@@ -100,11 +100,11 @@ sh $SMARTHOME_ROOT/bin/run_tests.sh --enable-google
 ### Initial Setup
 To use Gmail and Google Calendar with SAGE, you must create an app in the Google Cloud console and give it access to Gmail and Google Calendar. To do so, you can follow [this guide](https://developers.google.com/gmail/api/quickstart/python#authorize_credentials_for_a_desktop_application).
 Once you have created the `credentials.json` file, download it to `$SMARTHOME_ROOT/sage/misc_tools/apis/`, and rename it to `gcloud_credentials.json`.
-> **Note:** this will give SAGE access to the emails and calendar events associated with the Google account you used to set up the Google Cloud app.
+> **Note:** This will give SAGE access to the emails and calendar events associated with the Google account you used to set up the Google Cloud app.
 
 <details>
 <summary><b>Set up Google Calendar events for testing</b></summary>
-If you want to run the set of tests which use Google Calendar, you will need to set up 2 events in the calendar associated with the Google account you used to set up the Google Cloud app. If you do not do this, the test runner will not crash, but the tests will not pass.
+If you want to run the set of tests that use Google Calendar, you will need to set up 2 events in the calendar associated with the Google account you used to set up the Google Cloud app. If you do not do this, the test runner will not crash, but the tests will not pass.
 
 1. "Watch Casablanca with Mom" on the Saturday of the current week.
 2. "Cook Dinner" on the Saturday of the current week.
@@ -131,8 +131,8 @@ This will give you a link to paste into your browser for authentication. Log in 
 <details>
 <summary><b>Troubleshooting</b></summary>
 
-* If you get an error like `requests.exceptions.SSLError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443)`, make sure your `requests` package is the same as that given in `requirements.txt` (2.28.2 at time of writing this).
-* If you get `AttributeError: 'InstalledAppFlow' object has no attribute 'run_console'`, set your google packages to the following:
+* If you get an error like `requests.exceptions.SSLError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443)`, make sure your `requests` package is the same as that given in `requirements.txt` (2.28.2 at the time of writing this).
+* If you get `AttributeError: 'InstalledAppFlow' object has no attribute 'run_console'`, set your Google packages to the following:
 ```
 google-api-core               2.11.1
 google-api-python-client      2.98.0
@@ -152,7 +152,7 @@ Finally, paste the authorization code it gives you into the terminal. This shoul
 
 ## Configuration
 
-Our configuration system relies on dataclass configs that can be easily modified from command line.
+Our configuration system relies on dataclass configs that can be easily modified from the command line.
 
 ### Base Components
 All basic, reusable config components can be found in `base.py`. There are two main config classes: `BaseConfig` and `BaseToolConfig`. The `BaseConfig` is the most basic config. The `BaseToolConfig` is specific to configure tools.
@@ -160,7 +160,7 @@ All basic, reusable config components can be found in `base.py`. There are two m
 ### Creating new configs
 If you need to create a new config for your tool, there are two ways to do this
 
-#### Create new config class
+#### Create a new config class
 You will need to create a corresponding config to your tool class where you expose the parameters that you want to be configurable.
 As an example, let's say you want to create a new `Tool` class called `MyTool`. Before the tool definition, you define the config `MyToolConfig` which points to the `MyTool` class using the `_target` attribute.
 ```python
@@ -211,7 +211,7 @@ To create a memory:
 python $SMARTHOME_ROOT/bin/generate_multiuser_memory.py --save_dir SAVE_DIRECTORY --num_instructions_to_generate 150 --num_users 2
 ```
 
-This script will use `GPT-3` to generate `instructions` for each user. These instructions are saved under seperate folders, one for each user. Each instruction is a dictionary as follows:
+This script will use `GPT-4` to generate `instructions` for each user. These instructions are saved under separate folders, one for each user. Each instruction is a dictionary as follows:
 
 ```json
 {
@@ -222,16 +222,16 @@ This script will use `GPT-3` to generate `instructions` for each user. These ins
 ```
 `request_idx` is the request number. `date` is the date when the instruction is given. `instruction` is the user command.
 
-**NOTE1**: The date are given randomly for now
+**NOTE1**: The date is given randomly for now
 
-**NOTE2**: In hindsight, `$SMARTHOME_ROOT/bin/generate_multiuser_memory.py` uses specific _prompts_ available [here](https://github.sec.samsung.net/amal-feriani/smarthome-llms/blob/master/retrieval/data_generator/bootstrap_instructions.py).
+**NOTE2**: In hindsight, `$SMARTHOME_ROOT/bin/generate_multiuser_memory.py` uses specific _prompts_ available [here](https://github.com/SAIC-MONTREAL/SAGE/blob/main/sage/retrieval/data_generator/bootstrap_instructions.py).
 
 #### Memory storage
 After generating the instructions, we construct the `memory_bank` which is how the memory will be stored and used. The `memory_bank` consists of:
 * `History`: This contains all the user interactions timestamped with the date
 * `Profile`: This is the inferred user profile from the history
 
-A sample of the memory bank is available [here](https://github.sec.samsung.net/amal-feriani/smarthome-llms/blob/master/memory_data/memory_bank.json)
+A sample of the memory bank is available [here](https://github.com/SAIC-MONTREAL/SAGE/blob/main/data/memory_data/large_memory_bank.json)
 
 ### Memory utilisation
 The memory bank is used for (1) memory retrieval, (2) User Preference understanding
