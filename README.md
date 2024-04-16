@@ -1,6 +1,6 @@
 # SAGE
 
-Implementation of the paper [Smarthome Agent with Grounded Execution](https://arxiv.org/abs/2311.00772).
+Code repository for the paper [AIoT Smart Home via Autonomous LLM Agents](https://arxiv.org/abs/2311.00772), in which we introduce **SAGE** (**S**mart Home **A**gent with **G**rounded **E**xecution).
 
 # Usage
 
@@ -251,3 +251,542 @@ memory.search("user_name", query)
 #### User Preference understanding
 To infer user profiles/preferences from instructions, the `UserProfiler` class is used. It implements a hierarchical approach by first generating daily summaries and then aggregating them into one global user profile.
 This approach is inspired from the [SiliconFriend](https://arxiv.org/pdf/2305.10250.pdf) paper.
+
+
+# Smart home assistant performance baseline - 50 test cases
+
+To evaluate SAGE and competing methods, we created a dataset of 50 multimodal smart home test tasks. Test tasks are implemented by initializing device states and memories, running the SAGE with an input command, and then evaluating whether the device state was modified appropriately. For tasks that involve answering a user's questions (as opposed to modifying device states), the tests are designed such that to answer the question the agent must retrieve a specific piece of information (which it is unlikely to be able to guess). An LLM-based evaluator is then used to check whether the answer contained the expected information. The results of all tests are binary (pass / fail).
+
+We classify the test cases according to five types of challenges that are difficult for existing systems to handle. Most tests in the set belong to one or more of these categories. The categories are:
+
+1. **Personalization** Integrating knowledge of user preference to interpret the request correctly.
+2. **Intent resolution:** Understanding vague commands and drawing logical conclusions.
+3. **Device resolution**: Identifying the desired device ID based on natural language description.
+4. **Persistence**: Handling commands that require persistent monitoring of system states.
+5. **Command chaining**: Parsing a complex command that consists of multiple instructions, breaking it into actionable steps and executing each step in a coherent manner. 
+
+A subset of these commands are **direct commands**. These tests cases are simpler to execute in that they do not feature any of the 5 challenges listed above. These are more comparable to the tasks used to evaluate previous methods such as [Sasha]([url](https://arxiv.org/abs/2305.09802)).
+
+<details>
+<summary>Click to expand table</summary>
+
+<table>
+    <tr>
+        <td></td>
+        <td style="text-align: center" colspan="5"><b>Challenge Category</b></td>
+    </tr>
+    <tr>
+        <td><b>Task Utterance</b></td>
+        <td>Personalization</td>
+        <td>Persistence</td>
+        <td>Device Resolution</td>
+        <td>Intent Resolution</td>
+        <td>Command Chaining</td>
+    </tr>
+    <tr>
+        <td>Darken the entire house.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>What channel is playing on the TV?</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn it off.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on the light.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>It is too bright in the dining room.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn off all the lights that are dim.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Turn on the light by the bed</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>How many lights do I have?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What did I miss?</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Set up a christmassy mood by the fireplace.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I am getting a call, adjust the volume of the TV.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What is the current phase of the dish washing cycle?</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Can I change the color of the light by the fireplace? Respond with a yes or a no.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What is my mother's email address?</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Dishes are too greasy, set an appropriate mode in the dishwasher.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Dim the lights by the fire place to a third of the current value.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I think my freezer is set too cold, all my food is freezer burned.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on the frame TV to channel 5.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>When the TV by the credenza turns off turn on the light by the bed.</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Put something informative on the TV by the plant.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Lower the volume of the TV by the light.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Let me know if anyone in the house watches Jeopardy without me by turning the light by the fireplace red.</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Are all the lights on?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Move this channel to the other TV and turn this one off.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Change the lights of the house to represent my favourite hockey team. Use the lights by the TV, the dining room and the fireplace.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>What is the current temperature of the freezer?</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set up the lights for St. Patrick's day.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Is the fridge door open?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Put the game on the TV by the credenza and dim the lights by the TV.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>I am going to sleep. Change the bedroom light accordingly.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Is the TV by the credenza on?</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I want you to help me prank my husband. The next time someone opens the fridge, turn all the lights in the house off.</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Start the dishwasher.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I am going to visit my mom. Should I bring an umbrella?</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn off all the TVs and switch on the fireplace light.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>If the freezer is below minus 10 degrees, turn all the lights that are currently on blue.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Change the fridge internal temperature to 5 degrees celsius.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on the light in the dining room when the i open the fridge.</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on all the lights.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Create a new event in my calendar - build a spaceship tomorrow at 4pm.</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on light by the nightstand when the dishwasher is done.</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Play something for the kids on the TV by the plant.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Put some sports on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What is the fridge temperature?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What am I scheduled to do with my mom on Saturday?</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Increase the volume of the TV by the credenza whenever the dishwasher is running.</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Play something funny on the TV by the plant.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I love the song that's playing on TV by the credenza, crank it!</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>What does next week look like?</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Put the game on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set up lights for dinner.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set bedroom light to my favourite color.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Summarize the last email I received. Send the summary to Adam Sigal via email.</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Put the game on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set the lights in the bedroom to a cozy setting.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Put the game on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>If my father is not scheduled to visit next week, compose an email draft inviting him to come build a spaceship.</td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>It's been a long, tiring day. Can you play something light and entertaining on the TV by the plant?</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set the light over the dining table to match my weather preference.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Turn on the TV.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Make the living room look redonkulous!</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>If my mother is scheduled to visit this week, turn on national geographic on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Heading off to work. Turn off all the non essential devices.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+    </tr>
+</table>
+    
+</details>
