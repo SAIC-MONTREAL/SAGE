@@ -268,7 +268,7 @@ We classify the test cases according to five types of challenges that are diffic
 A subset of these commands are **direct commands**. These tests cases are simpler to execute in that they do not feature any of the 5 challenges listed above. These are more comparable to the tasks used to evaluate previous methods such as [Sasha]([url](https://arxiv.org/abs/2305.09802)).
 
 <details>
-<summary>Click to expand table</summary>
+<summary><b>Click to expand table</b></summary>
 
 <table>
     <tr>
