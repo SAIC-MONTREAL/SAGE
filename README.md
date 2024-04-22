@@ -253,7 +253,7 @@ To infer user profiles/preferences from instructions, the `UserProfiler` class i
 This approach is inspired from the [SiliconFriend](https://arxiv.org/pdf/2305.10250.pdf) paper.
 
 
-# Smart home assistant performance baseline - 50 test cases
+# Smart home assistant performance baseline - 50 test cases 
 
 To evaluate SAGE and competing methods, we created a dataset of 50 multimodal smart home test tasks. Test tasks are implemented by initializing device states and memories, running the SAGE with an input command, and then evaluating whether the device state was modified appropriately. For tasks that involve answering a user's questions (as opposed to modifying device states), the tests are designed such that to answer the question the agent must retrieve a specific piece of information (which it is unlikely to be able to guess). An LLM-based evaluator is then used to check whether the answer contained the expected information. The results of all tests are binary (pass / fail).
 
@@ -267,8 +267,12 @@ We classify the test cases according to five types of challenges that are diffic
 
 A subset of these commands are **direct commands**. These tests cases are simpler to execute in that they do not feature any of the 5 challenges listed above. These are more comparable to the tasks used to evaluate previous methods such as [Sasha]([url](https://arxiv.org/abs/2305.09802)).
 
+In addition to the main set of 50 tasks, we also created a set of 10 extra "test set" tasks after the development of SAGE was complete. The aim of these tasks was to verify that the prompts had not been over-engineered for the task set. The author who developed these tasks was familiar with the SAGE architecture, but was not involved in the final prompt engineering stages. These test set tasks evaluate performance on the same five categories of challenges as the main set.
+
 <details>
-<summary><b>Click to expand table</b></summary>
+<summary><b>Click to expand tables</b></summary>
+
+<h3>Main Set Tasks</h3>
 
 <table>
     <tr>
@@ -276,7 +280,7 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td style="text-align: center" colspan="5"><b>Challenge Category</b></td>
     </tr>
     <tr>
-        <td><b>Task Utterance</b></td>
+        <td><b>User Command</b></td>
         <td>Personalization</td>
         <td>Persistence</td>
         <td>Device Resolution</td>
@@ -340,14 +344,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
     </tr>
     <tr>
-        <td>How many lights do I have?</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
         <td>What did I miss?</td>
         <td>✔</td>
         <td></td>
@@ -380,14 +376,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
     </tr>
     <tr>
-        <td>Can I change the color of the light by the fireplace? Respond with a yes or a no.</td>
-        <td></td>
-        <td></td>
-        <td>✔</td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
         <td>What is my mother's email address?</td>
         <td>✔</td>
         <td></td>
@@ -408,14 +396,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
         <td></td>
         <td>✔</td>
-        <td>✔</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>I think my freezer is set too cold, all my food is freezer burned.</td>
-        <td></td>
-        <td></td>
-        <td></td>
         <td>✔</td>
         <td></td>
     </tr>
@@ -452,14 +432,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
     </tr>
     <tr>
-        <td>Let me know if anyone in the house watches Jeopardy without me by turning the light by the fireplace red.</td>
-        <td></td>
-        <td>✔</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
         <td>Are all the lights on?</td>
         <td></td>
         <td></td>
@@ -489,14 +461,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
         <td>✔</td>
         <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Set up the lights for St. Patrick's day.</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>✔</td>
         <td></td>
     </tr>
     <tr>
@@ -532,14 +496,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
     </tr>
     <tr>
-        <td>I want you to help me prank my husband. The next time someone opens the fridge, turn all the lights in the house off.</td>
-        <td></td>
-        <td>✔</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
         <td>Start the dishwasher.</td>
         <td></td>
         <td></td>
@@ -557,14 +513,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
     </tr>
     <tr>
         <td>Turn off all the TVs and switch on the fireplace light.</td>
-        <td></td>
-        <td></td>
-        <td>✔</td>
-        <td></td>
-        <td>✔</td>
-    </tr>
-    <tr>
-        <td>If the freezer is below minus 10 degrees, turn all the lights that are currently on blue.</td>
         <td></td>
         <td></td>
         <td>✔</td>
@@ -617,14 +565,6 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td></td>
         <td>✔</td>
         <td>✔</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Put some sports on the TV by the credenza.</td>
-        <td>✔</td>
-        <td></td>
-        <td>✔</td>
-        <td></td>
         <td></td>
     </tr>
     <tr>
@@ -788,5 +728,95 @@ A subset of these commands are **direct commands**. These tests cases are simple
         <td>✔</td>
     </tr>
 </table>
-    
+
+
+<h3>Test Set Tasks</h3>
+
+<table>
+    <tr>
+        <td></td>
+        <td style="text-align: center" colspan="5"><b>Challenge Category</b></td>
+    </tr>
+    <tr>
+        <td><b>User Command</b></td>
+        <td>Personalization</td>
+        <td>Persistence</td>
+        <td>Device Resolution</td>
+        <td>Intent Resolution</td>
+        <td>Command Chaining</td>
+    </tr>
+    <tr>
+        <td>How many lights do I have?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Can I change the color of the light by the fireplace? Respond with a yes or a no.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I think my freezer is set too cold, all my food is freezer burned.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Let me know if anyone in the house watches Jeopardy without me by turning the light by the fireplace red.</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Set up the lights for St. Patrick's day.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I want you to help me prank my husband. The next time someone opens the fridge, turn all the lights in the house off.</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>If the freezer is below minus 10 degrees, turn all the lights that are currently on blue.</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+    </tr>
+    <tr>
+        <td>Put some sports on the TV by the credenza.</td>
+        <td>✔</td>
+        <td></td>
+        <td>✔</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>I love the song that's playing on TV by the credenza, crank it!</td>
+        <td></td>
+        <td></td>
+        <td>✔</td>
+        <td>✔</td>
+        <td></td>
+    </tr>
+</table>
+
 </details>
