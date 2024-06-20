@@ -13,6 +13,7 @@ export HUGGINGFACEHUB_API_TOKEN=""
 export OPENWEATHERMAP_API_KEY=""
 
 # SMARTTHINGS API TOKEN
+# Go to https://account.smartthings.com/tokens
 export SMARTTHINGS_API_TOKEN=""
 
 # Leave as empty string:

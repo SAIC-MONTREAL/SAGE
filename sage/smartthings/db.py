@@ -109,11 +109,9 @@ class DeviceCapabilityDb:
     To update this when adding new devices, call the populate function.
     """
 
-    db_name = "device_capabilities"
-
-    def __init__(self):
+    def __init__(self, db_name: str):
         self.client = MongoClient(mongo_url)
-        self.db = self.client[self.db_name]
+        self.db = self.client[db_name]
 
     def get_device_capabilities(self, device_id: str) -> list[dict]:
         """

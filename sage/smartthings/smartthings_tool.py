@@ -7,7 +7,7 @@ import json
 from dataclasses import dataclass
 from dataclasses import field
 from difflib import SequenceMatcher
-from typing import Any
+from typing import Any, Dict
 from typing import List
 from typing import Type
 
@@ -64,7 +64,7 @@ class GetAttributeTool(SAGEBaseTool):
     Tool for getting a smartthings attribute.
     """
 
-    dm: DocManager = DocManager.from_json()
+    dm: DocManager = None
     requests_module: Any = requests
     smartthings_token: str = None
 
@@ -72,6 +72,7 @@ class GetAttributeTool(SAGEBaseTool):
         if config.global_config.test_id is not None:
             self.requests_module = sage.testing.fake_requests
         self.smartthings_token = config.global_config.smartthings_token
+        self.dm = DocManager.from_json(config.global_config.docmanager_cache_path)
 
     def _run(self, text: str):
 
@@ -152,13 +153,14 @@ class ExecuteCommandTool(SAGEBaseTool):
     """
 
     requests_module: Any = requests
-    dm: DocManager = DocManager.from_json()
+    dm: DocManager = None
     smartthings_token: str = None
 
     def setup(self, config: ExecuteCommandToolConfig):
         if config.global_config.test_id is not None:
             self.requests_module = sage.testing.fake_requests
         self.smartthings_token = config.global_config.smartthings_token
+        self.dm = DocManager.from_json(config.global_config.docmanager_cache_path)
 
     def _run(self, text: str):
         exec_spec = parse_json(text)
@@ -222,7 +224,10 @@ capability_id (str)
 
 
 class ApiDocRetrievalTool(SAGEBaseTool):
-    dm: DocManager = DocManager.from_json()
+    dm: DocManager = None
+
+    def setup(self, config: ApiDocRetrievalToolConfig) -> None:
+        self.dm = DocManager.from_json(config.global_config.docmanager_cache_path)
 
     def _run(self, text):
 
@@ -352,7 +357,7 @@ class SmartThingsPlannerTool(SAGEBaseTool):
             config.llm_config = TGIConfig(stop_sequences=["Human", "<FINISHED>"])
         llm = config.llm_config.instantiate()
         self.logpath = config.global_config.logpath
-        dm = DocManager.from_json()
+        dm = DocManager.from_json(config.global_config.docmanager_cache_path)
         (
             one_liners_string,
             device_capability_string,

@@ -13,8 +13,6 @@ from langchain.schema import BaseMessage, ChatResult, LLMResult
 
 from langchain_visualizer.hijacking import VisualizationWrapper, ice_hijack
 
-from utils.our_chat_openai import OurChatOpenAI
-
 # todo: ideally we would stop tying costs to Davinci tokens, but this would involve
 # changing ICE's frontend logic
 MODEL_COST_MAP = {
@@ -134,5 +132,3 @@ ice_hijack(BaseLLM, "generate", LlmSyncVisualizer)
 ice_hijack(BaseLLM, "agenerate", LlmAsyncVisualizer)
 ice_hijack(ChatOpenAI, "_generate", ChatLlmSyncVisualizer)
 ice_hijack(ChatOpenAI, "_agenerate", ChatLlmAsyncVisualizer)
-
-ice_hijack(OurChatOpenAI, "_generate", ChatLlmSyncVisualizer)

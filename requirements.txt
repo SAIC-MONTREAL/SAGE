@@ -31,3 +31,5 @@ pyowm
 open-clip-torch
 sentence-transformers
 chromadb==0.4.8
+pandas
+numpy

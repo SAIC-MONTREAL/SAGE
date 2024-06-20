@@ -4,13 +4,13 @@ from dataclasses import dataclass, field
 from typing import Dict, Any, List, Type
 import datetime
 
+from langchain.chat_models import ChatOpenAI
 from langchain.llms.base import BaseLLM
 from langchain import HuggingFaceTextGenInference
 from langchain.schema.messages import HumanMessage
 from langchain.chat_models import ChatAnthropic
 
 from sage.base import BaseConfig
-from sage.utils.our_chat_openai import OurChatOpenAI
 
 
 @dataclass
@@ -30,12 +30,10 @@ class LLMConfig(BaseConfig):
 class GPTConfig(LLMConfig):
     """Configuration of Open AI llms"""
 
-    _target: Type = field(default_factory=lambda: OurChatOpenAI)
+    _target: Type = field(default_factory=lambda: ChatOpenAI)
 
     model_name: str = "gpt-4"
     temperature: float = 0.0
-    do_saic_cache: bool = False
-    n_print_new_tokens: int = 20
     streaming: bool = True
     request_timeout: int = 600
     max_tokens: int = 1000

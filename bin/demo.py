@@ -41,7 +41,7 @@ class DemoConfig:
     preloaded_commands: tuple[tuple] = (
         (
             "Amal",
-            "Turn on the TV by the credenza.",
+            "Turn on the TV.",
         ),
     )
     trigger_server_url: str = f"http://{os.getenv('TRIGGER_SERVER_URL')}"
