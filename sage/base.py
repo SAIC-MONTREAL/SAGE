@@ -1,4 +1,5 @@
 """All our base classes"""
+from pathlib import Path
 import os
 from dataclasses import dataclass
 from dataclasses import field
@@ -41,6 +42,10 @@ class GlobalConfig:
     test_id: str = None
 
     smartthings_token: str = os.getenv("SMARTTHINGS_API_TOKEN")
+
+    docmanager_cache_path: Path = Path(os.getenv("SMARTHOME_ROOT")).joinpath(
+    "external_api_docs/cached_real_docmanager.json"
+)
 
 
 @dataclass

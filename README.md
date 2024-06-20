@@ -11,7 +11,7 @@ SAGE is tested using Python 3.10.
 ### Set up environment variables
 
 You will need to setup some environment variables before running the system.
-These variables can be found under `smarthome-llms/bin/config.sh`.
+These variables can be found under `bin/config.sh`.
 
 Set the variables accordingly and run the script:
 
@@ -38,8 +38,8 @@ Our framework supports closed- and open-source LLMs like:
 
 To host open-source LLMs, we used [Text generation API](https://github.com/huggingface/text-generation-inference) from hugging face.
 
-## Using SAGE
 
+## Before using SAGE
 1 - Start the mongo DB docker.
 
 ```
@@ -47,13 +47,30 @@ cd $SMARTHOME_ROOT/docker
 docker compose up
 ```
 
-2 - Run the demo script
+2 - Launch the trigger server for persistent command checking
+```
+python $SMARTHOME_ROOT/sage/testing/run_server.py
+```
+
+## Using SAGE with your setup
+
+1 - Add your SmartThings API key in config.sh and source the config. If you don't have a SmartThings API key, you can get one at https://account.smartthings.com/tokens.
+
+
+2 - Initialize your devices (this may take a bit of time). This will extract the relevant info from your devices and store it in a file so SAGE can use it.
+```
+python $SMARTHOME_ROOT/bin/update_smartthings.py
+```
+
+3 - Take a photo of each of your devices (try to include a bit of the surroundings). Put all of the photos under user_device_images, with the name of each photo being <device_id>.jpg. This is to use the device disambiguation tool. For an example, see [here](https://github.com/SAIC-MONTREAL/SAGE/tree/main/sage/testing/assets/images) for an example.
+
+4 - Run the demo script
 
 ```
 python $SMARTHOME_ROOT/bin/demo.py
 ```
 
-## Using our smart home performance test benchmark
+## Running our smart home performance test benchmark
 
 We carefully designed and implemented an LLM evaluation benchmark for smarthomes.
 The benchmark consists of 50 testcases belonging to different tasks within a smarthome.
@@ -62,12 +79,7 @@ You can look at the testcases in `$SMARTHOME_ROOT/sage/testing/testcases.py`
 
 To reproduce the results in our paper, please follow these steps:
 
-1 - Launch the trigger server for persistent command checking
-```
-python $SMARTHOME_ROOT/sage/testing/run_server.py
-```
-
-2 - Run the test suite on a single LLM
+1 - Run the test suite on a single LLM
 ```
 python $SMARTHOME_ROOT/sage/testing/test_runner.py
 ```

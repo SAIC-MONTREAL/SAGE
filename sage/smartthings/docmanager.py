@@ -74,13 +74,10 @@ class DocManager:
     strings each time the class is called, leading to more cache hits and thus faster and cheaper testing.
     """
 
-    cache_path = Path(os.getenv("SMARTHOME_ROOT")).joinpath(
-        "external_api_docs/cached_docmanager.pkl"
-    )
-    json_cache_path = Path(os.getenv("SMARTHOME_ROOT")).joinpath(
-        "external_api_docs/cached_docmanager.json"
-    )
-    db = DeviceCapabilityDb()
+    def __init__(self, capability_db_name: str):
+        self.db = DeviceCapabilityDb(db_name=capability_db_name)
+
+
 
     def init(self):
         with open(
@@ -115,7 +112,7 @@ class DocManager:
             for cap_info in cap_infos
         }
 
-    def to_json(self):
+    def to_json(self, json_cache_path: Path):
         """
         Save self to disk as JSON.
         """
@@ -125,23 +122,25 @@ class DocManager:
             "device_capabilities": dump_ordered_dict_recur(self.device_capabilities),
             "capability_info_from_devices": self.capability_info_from_devices,
             "online_info": self.online_info,
+            "capability_db_name": self.db.db.name,
         }
-        with open(self.json_cache_path, "w") as f:
+        with open(json_cache_path, "w") as f:
             json.dump(obj, f)
 
     @staticmethod
-    def from_json():
+    def from_json(json_cache_path: Path):
         """
         Create DocManager from serialized JSON.
         """
-        with open(DocManager.json_cache_path, "r") as f:
+        with open(json_cache_path, "r") as f:
             obj = json.load(f)
-        dm = DocManager()
+        dm = DocManager('tmp')
         dm.default_devices = obj["default_devices"]
         dm.device_names = obj["device_names"]
         dm.device_capabilities = load_ordered_dict_recur(obj["device_capabilities"])
         dm.capability_info_from_devices = obj["capability_info_from_devices"]
         dm.online_info = obj["online_info"]
+        dm.db = DeviceCapabilityDb(db_name=obj["capability_db_name"])
 
         return dm
 

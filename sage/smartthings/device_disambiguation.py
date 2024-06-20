@@ -200,8 +200,8 @@ Input to the tool should be a json string with 2 keys:
 devices (list of guid strings).
 disambiguation_information (str): objects or descriptions of device surroundings. Do not include the name of the device type.
 """
-
-    image_folder: str = f"{os.getenv('SMARTHOME_ROOT')}/sage/testing/assets/images"
+    # Update this path to the folder containing images of the devices if using own images
+    image_folder: str = f"{os.getenv('SMARTHOME_ROOT')}/user_device_images"
 
 
 class DeviceDisambiguationTool(SAGEBaseTool):
@@ -210,7 +210,10 @@ class DeviceDisambiguationTool(SAGEBaseTool):
     detector: VlmDeviceDetector = None
 
     def setup(self, config: DeviceDisambiguationToolConfig) -> None:
-        self.detector = VlmDeviceDetector(config.image_folder)
+        if config.global_config.test_id is not None:
+            self.detector = VlmDeviceDetector(f"{os.getenv('SMARTHOME_ROOT')}/sage/testing/assets/images")
+        else:
+            self.detector = VlmDeviceDetector(config.image_folder)
 
     def _run(self, query: str) -> str:
         return self.detector.identify_device(query)

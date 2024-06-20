@@ -1,0 +1,5 @@
+**/mongo_data/**
+**/test/**
+**/logs/**
+**/user_info/**
+__pycache__

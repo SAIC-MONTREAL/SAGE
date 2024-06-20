@@ -93,7 +93,7 @@ class LlmType(Enum):
 class TestDemoConfig:
     trigger_server_url: str = f"http://{os.getenv('TRIGGER_SERVER_URL')}"
     trigger_servers: tuple[tuple] = (("condition", trigger_server_url),)
-    coordinator_type: CoordinatorType = CoordinatorType.ZEROSHOT
+    coordinator_type: CoordinatorType = CoordinatorType.SAGE
     llm_type: LlmType = LlmType.GPT
     model_name: str = "gpt-4"
     wandb_tracing: bool = False
@@ -159,7 +159,12 @@ def main(test_demo_config: TestDemoConfig):
         if name == "condition":
             condition_server_url = url
 
-    BaseConfig.global_config = GlobalConfig(condition_server_url=condition_server_url)
+    BaseConfig.global_config = GlobalConfig(
+        condition_server_url=condition_server_url, 
+        docmanager_cache_path=Path(os.getenv("SMARTHOME_ROOT")).joinpath(
+            "external_api_docs/cached_test_docmanager.json"
+        )
+    )
 
     if test_demo_config.resume_from:
         if test_demo_config.resume_from == "latest":
