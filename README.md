@@ -62,7 +62,7 @@ python $SMARTHOME_ROOT/sage/testing/run_server.py
 python $SMARTHOME_ROOT/bin/update_smartthings.py
 ```
 
-3 - Take a photo of each of your devices (try to include a bit of the surroundings). Put all of the photos under user_device_images, with the name of each photo being <device_id>.jpg. This is to use the device disambiguation tool. For an example, see [here](https://github.com/SAIC-MONTREAL/SAGE/tree/main/sage/testing/assets/images) for an example.
+3 - Take a photo of each of your devices (try to include a bit of the surroundings). Put all of the photos under user_device_images, with the name of each photo being <device_id>.jpg. This is to use the device disambiguation tool. See [here](https://github.com/SAIC-MONTREAL/SAGE/tree/main/sage/testing/assets/images) for an example.
 
 4 - Run the demo script
 
